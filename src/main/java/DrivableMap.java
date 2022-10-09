@@ -7,6 +7,7 @@
  * created the constructor for you already.
  */
 
+import java.sql.DriverAction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,15 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
 
+    public Boolean addDrivable(String id, Drivable object){
+        if(this.drivable_map.containsKey(id)){
+            return false;
+        }
+        else{
+            this.drivable_map.put(id, object);
+            return true;
+        }
+    }
 
 
 
@@ -37,8 +47,14 @@ class DrivableMap {
      * You may want to use drivable_map.keys() or drivable_map.values() to
      * iterate through drivable_map.
      */
-
-
+    public Boolean hasFasterThan(int speed){
+        for (Drivable value : this.drivable_map.values()){
+            if (value.getMaxSpeed() >= speed){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -46,6 +62,16 @@ class DrivableMap {
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
      */
+    public ArrayList<Tradable> getTradable(){
+       ArrayList<Tradable> returnList = new ArrayList<Tradable>();
+       for (Drivable object: this.drivable_map.values()){
+          if (object instanceof Tradable){
+              returnList.add(((Tradable) object));
+          }
+       }
+       return returnList;
+    }
+
 
 
 
